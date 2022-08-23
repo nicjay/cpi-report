@@ -1,7 +1,17 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import { loadData } from '../utils/load-data';
 
-const Home: NextPage = () => {
+type HomeProps = {
+  data: {
+    cpi: string;
+    food: string;
+    energy: string;
+    gas: string;
+  };
+};
+
+export default function Home(props: HomeProps) {
   return (
     <div>
       <Head>
@@ -11,12 +21,58 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1 className="text-3xl text-blue-500 font-bold text-center">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className="p-8 text-center text-3xl font-bold text-blue-500">CPI Report</h1>
+        <div className="mx-auto flex flex-row justify-center gap-4">
+          <Link href={'/'}>
+            <div className="group h-auto w-48 rounded-lg border-4 border-blue-300 p-8 text-center">
+              <div className="text-2xl font-bold text-blue-500">CPI</div>
+              <div className="text-3xl">{props.data.cpi}%</div>
+              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
+                Since Last Year
+              </div>
+            </div>
+          </Link>
+          <Link href={'/'}>
+            <div className="group h-auto w-48 rounded-lg border-4 border-green-300 p-8 text-center">
+              <div className="text-2xl font-bold text-green-500">Food</div>
+              <div className="text-3xl">{props.data.food}%</div>
+              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
+                Since Last Year
+              </div>
+            </div>
+          </Link>
+          <Link href={'/'}>
+            <div className="group h-auto w-48 rounded-lg border-4 border-yellow-300 p-8 text-center">
+              <div className="text-2xl font-bold text-yellow-500">Energy</div>
+              <div className="text-3xl">{props.data.energy}%</div>
+              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
+                Since Last Year
+              </div>
+            </div>
+          </Link>
+          <Link href={'/'}>
+            <div className="group h-auto w-48 rounded-lg border-4 border-orange-300 p-8 text-center">
+              <div className="text-2xl font-bold text-orange-500">Gas</div>
+              <div className="text-3xl">{props.data.gas}%</div>
+              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
+                Since Last Year
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="p-4 text-center text-lg">
+          Data Sourced From <a href="https://www.bls.gov/">U.S. BUREAU OF LABOR STATISTICS</a>
+        </div>
+        {/* <pre>{JSON.stringify(props.data, null, 2)}</pre> */}
       </main>
     </div>
   );
-};
+}
 
-export default Home;
+export async function getStaticProps() {
+  const data = await loadData();
+
+  return {
+    props: { data }
+  };
+}
