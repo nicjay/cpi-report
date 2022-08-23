@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
 import { useState } from 'react';
 import Card from '../Components/Card';
+import ThemeSwitch from '../Components/ThemeSwitch';
 import { loadData } from '../utils/load-data';
 
 type HomeProps = {
@@ -32,10 +33,13 @@ export default function Home(props: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="p-4 text-center text-3xl font-bold text-slate-700">CPI Report</h1>
-        <h2 className="p-4 text-center text-2xl">Previous 12 Months</h2>
-        <div className="mx-auto flex flex-row justify-center gap-4">
+      <main className="mx-auto max-w-4xl">
+        <div className="flex flex-row justify-between py-4">
+          <h1 className="text-3xl font-bold text-slate-700 dark:text-slate-200">CPI Report</h1>
+          <ThemeSwitch />
+        </div>
+        <h2 className="p-8 text-center text-2xl">Previous 12 Months</h2>
+        <div className="grid grid-cols-4 gap-4">
           <Card
             title="CPI"
             value={props.data.cpi}
@@ -65,12 +69,12 @@ export default function Home(props: HomeProps) {
             twColorBorder="border-orange-300"
           />
         </div>
-        <div className="p-4 text-center text-lg text-slate-700">
+        <div className="p-8 text-center text-lg text-slate-700 dark:text-slate-200">
           Data Sourced From <a href="https://www.bls.gov/">U.S. BUREAU OF LABOR STATISTICS</a>
         </div>
 
         <button
-          className="mx-auto flex flex-row justify-center rounded-lg bg-gray-900 p-2 font-semibold text-white"
+          className="rounded-lg border-2 border-slate-500 bg-gray-900 p-2  font-semibold text-white"
           onClick={() => setShowDebug(!showDebug)}
         >
           {showDebug ? (
@@ -83,8 +87,9 @@ export default function Home(props: HomeProps) {
             </div>
           )}
         </button>
+
         {showDebug && (
-          <pre className="m-8 rounded-lg bg-gray-800 p-4 text-white">
+          <pre className="mt-4 rounded-lg bg-gray-800 p-4 text-white">
             {JSON.stringify(props.data.rawAll, null, 2)}
           </pre>
         )}
