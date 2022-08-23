@@ -29,7 +29,8 @@ export async function loadData() {
     cpi: getChange_Latest12Month(responseJson, SERIES_ID_CPI),
     food: getChange_Latest12Month(responseJson, SERIES_ID_FOOD),
     energy: getChange_Latest12Month(responseJson, SERIES_ID_ENERGY),
-    gas: getChange_Latest12Month(responseJson, SERIES_ID_GAS)
+    gas: getChange_Latest12Month(responseJson, SERIES_ID_GAS),
+    rawAll: responseJson
   };
 }
 

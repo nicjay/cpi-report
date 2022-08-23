@@ -1,9 +1,20 @@
+import {
+  faAngleDown,
+  faAngleUp,
+  faBolt,
+  faCartShopping,
+  faChartLine,
+  faGasPump
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
-import Link from 'next/link';
+import { useState } from 'react';
+import Card from '../Components/Card';
 import { loadData } from '../utils/load-data';
 
 type HomeProps = {
   data: {
+    rawAll: any;
     cpi: string;
     food: string;
     energy: string;
@@ -12,6 +23,7 @@ type HomeProps = {
 };
 
 export default function Home(props: HomeProps) {
+  const [showDebug, setShowDebug] = useState(false);
   return (
     <div>
       <Head>
@@ -21,49 +33,61 @@ export default function Home(props: HomeProps) {
       </Head>
 
       <main>
-        <h1 className="p-8 text-center text-3xl font-bold text-blue-500">CPI Report</h1>
+        <h1 className="p-4 text-center text-3xl font-bold text-slate-700">CPI Report</h1>
+        <h2 className="p-4 text-center text-2xl">Previous 12 Months</h2>
         <div className="mx-auto flex flex-row justify-center gap-4">
-          <Link href={'/'}>
-            <div className="group h-auto w-48 rounded-lg border-4 border-blue-300 p-8 text-center">
-              <div className="text-2xl font-bold text-blue-500">CPI</div>
-              <div className="text-3xl">{props.data.cpi}%</div>
-              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
-                Since Last Year
-              </div>
-            </div>
-          </Link>
-          <Link href={'/'}>
-            <div className="group h-auto w-48 rounded-lg border-4 border-green-300 p-8 text-center">
-              <div className="text-2xl font-bold text-green-500">Food</div>
-              <div className="text-3xl">{props.data.food}%</div>
-              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
-                Since Last Year
-              </div>
-            </div>
-          </Link>
-          <Link href={'/'}>
-            <div className="group h-auto w-48 rounded-lg border-4 border-yellow-300 p-8 text-center">
-              <div className="text-2xl font-bold text-yellow-500">Energy</div>
-              <div className="text-3xl">{props.data.energy}%</div>
-              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
-                Since Last Year
-              </div>
-            </div>
-          </Link>
-          <Link href={'/'}>
-            <div className="group h-auto w-48 rounded-lg border-4 border-orange-300 p-8 text-center">
-              <div className="text-2xl font-bold text-orange-500">Gas</div>
-              <div className="text-3xl">{props.data.gas}%</div>
-              <div className="text-lg opacity-0 transition group-hover:-translate-y-2 group-hover:opacity-100">
-                Since Last Year
-              </div>
-            </div>
-          </Link>
+          <Card
+            title="CPI"
+            value={props.data.cpi}
+            icon={faChartLine}
+            twColorPrimary="text-blue-500"
+            twColorBorder="border-blue-300"
+          />
+          <Card
+            title="Food"
+            value={props.data.food}
+            icon={faCartShopping}
+            twColorPrimary="text-green-500"
+            twColorBorder="border-green-300"
+          />
+          <Card
+            title="Energy"
+            value={props.data.energy}
+            icon={faBolt}
+            twColorPrimary="text-yellow-500"
+            twColorBorder="border-yellow-300"
+          />
+          <Card
+            title="Gas"
+            value={props.data.gas}
+            icon={faGasPump}
+            twColorPrimary="text-orange-500"
+            twColorBorder="border-orange-300"
+          />
         </div>
-        <div className="p-4 text-center text-lg">
+        <div className="p-4 text-center text-lg text-slate-700">
           Data Sourced From <a href="https://www.bls.gov/">U.S. BUREAU OF LABOR STATISTICS</a>
         </div>
-        {/* <pre>{JSON.stringify(props.data, null, 2)}</pre> */}
+
+        <button
+          className="mx-auto flex flex-row justify-center rounded-lg bg-gray-900 p-2 font-semibold text-white"
+          onClick={() => setShowDebug(!showDebug)}
+        >
+          {showDebug ? (
+            <div className="flex items-center gap-2">
+              Hide Debug <FontAwesomeIcon icon={faAngleUp} />
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              Show Debug <FontAwesomeIcon icon={faAngleDown} />
+            </div>
+          )}
+        </button>
+        {showDebug && (
+          <pre className="m-8 rounded-lg bg-gray-800 p-4 text-white">
+            {JSON.stringify(props.data.rawAll, null, 2)}
+          </pre>
+        )}
       </main>
     </div>
   );
