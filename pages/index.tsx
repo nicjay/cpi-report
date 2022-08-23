@@ -9,8 +9,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
 import { useState } from 'react';
-import Card from '../Components/Card';
-import ThemeSwitch from '../Components/ThemeSwitch';
+import Card from '../components/Card';
+import ThemeSwitch from '../components/ThemeSwitch';
 import { loadData } from '../utils/load-data';
 
 type HomeProps = {
