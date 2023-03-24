@@ -6,6 +6,7 @@ Public data provided by the U.S. Bureau of Labor Statistics, updated monthly.
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Recharts](https://recharts.org/en-US/)
 - [Vercel](https://vercel.com/)
 
 ## Usage
