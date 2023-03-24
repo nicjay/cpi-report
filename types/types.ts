@@ -5,17 +5,17 @@ export type BlsApiResponse = {
   Results: Results;
 };
 
-type Results = {
+export type Results = {
   series: Series[];
 };
 
-type Series = {
+export type Series = {
   seriesID: string;
   catalog: Catalog;
   data: Data[];
 };
 
-type Catalog = {
+export type Catalog = {
   series_title: string;
   series_id: string;
   seasonality: string;
@@ -26,7 +26,7 @@ type Catalog = {
   item: string;
 };
 
-type Data = {
+export type Data = {
   year: string;
   period: string;
   periodName: string;
@@ -36,7 +36,7 @@ type Data = {
   calculations: Calculations;
 };
 
-type Calculations = {
+export type Calculations = {
   net_changes: {};
   pct_changes: {
     1: string;

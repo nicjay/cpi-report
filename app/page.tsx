@@ -1,4 +1,6 @@
 import { faBolt, faCartShopping, faChartLine, faGasPump } from '@fortawesome/free-solid-svg-icons';
+
+import Chart from '@/components/Chart';
 import Card from '../components/Card';
 import { getData } from '../utils/data';
 
@@ -37,6 +39,9 @@ export default async function Home() {
           twColorPrimary="text-orange-500"
           twColorBorder="border-orange-300"
         />
+      </div>
+      <div className="my-8 h-96 w-full">
+        <Chart historicalData={data.cpiHistory} />
       </div>
       <div className="p-8 text-center text-lg text-slate-700 dark:text-slate-200">
         Data Sourced From <a href="https://www.bls.gov/">U.S. BUREAU OF LABOR STATISTICS</a>

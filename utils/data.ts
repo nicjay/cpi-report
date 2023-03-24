@@ -13,7 +13,7 @@ export async function getData() {
     },
     body: JSON.stringify({
       seriesid: [SERIES_ID_CPI, SERIES_ID_FOOD, SERIES_ID_ENERGY, SERIES_ID_GAS],
-      startyear: 2022,
+      startyear: 2018,
       endyear: 2023,
       catalog: true,
       calculations: true,
@@ -30,6 +30,7 @@ export async function getData() {
     food: getChange_Latest12Month(responseJson, SERIES_ID_FOOD),
     energy: getChange_Latest12Month(responseJson, SERIES_ID_ENERGY),
     gas: getChange_Latest12Month(responseJson, SERIES_ID_GAS),
+    cpiHistory: getHistorical(responseJson, SERIES_ID_CPI),
     rawAll: responseJson
   };
 }
@@ -41,4 +42,10 @@ function getChange_Latest12Month(responseJson: BlsApiResponse, seriesId: string)
   if (!data) return '';
 
   return data[0].calculations.pct_changes[12];
+}
+
+function getHistorical(responseJson: BlsApiResponse, seriesId: string) {
+  const series = responseJson.Results.series.find((item) => item.seriesID == seriesId);
+  if (!series) return [];
+  return series.data;
 }
