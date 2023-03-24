@@ -18,13 +18,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body>
+      <body className="mx-auto flex h-screen max-w-5xl flex-col py-6">
         <Providers>
-          <div className="mx-auto flex h-screen max-w-5xl flex-col py-6">
-            <Header />
-            <main className="grow py-16">{children}</main>
-            <Footer />
-          </div>
+          <Header />
+          <main className="grow py-16">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
