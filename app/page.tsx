@@ -1,8 +1,8 @@
 import { faBolt, faCartShopping, faChartLine, faGasPump } from '@fortawesome/free-solid-svg-icons';
 
 import Chart from '@/components/Chart';
+import { getData } from '@/utils/data';
 import Card from '../components/Card';
-import { getData } from '../utils/data';
 
 export default async function Home() {
   const data = await getData();

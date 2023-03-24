@@ -6,13 +6,12 @@ import ThemeSwitch from './ThemeSwitch';
 export default function Header() {
   return (
     <header className="flex justify-between">
-      <Link href="/">
-        <h1 className="flex items-center gap-2 text-xl">
+      <h1>
+        <Link href="/" className="flex items-center gap-2 text-xl">
           <FontAwesomeIcon icon={faChartLine} />
           CPI REPORT
-        </h1>
-      </Link>
-
+        </Link>
+      </h1>
       <nav className="flex items-center gap-3">
         <Link href="/debug">Debug</Link>
         <Link href="/about">About</Link>

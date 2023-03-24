@@ -6,6 +6,7 @@ const SERIES_ID_ENERGY: string = 'CUUR0000SA0E'; // U.S. city average, Energy
 const SERIES_ID_GAS: string = 'CUUR0000SETB01'; // U.S. city average, Gasoline, all types
 
 export async function getData() {
+  const currentYear = new Date().getFullYear();
   const requestOptions: RequestInit = {
     method: 'POST',
     headers: {
@@ -13,8 +14,8 @@ export async function getData() {
     },
     body: JSON.stringify({
       seriesid: [SERIES_ID_CPI, SERIES_ID_FOOD, SERIES_ID_ENERGY, SERIES_ID_GAS],
-      startyear: 2018,
-      endyear: 2023,
+      startyear: currentYear - 5,
+      endyear: currentYear,
       catalog: true,
       calculations: true,
       registrationkey: process.env.BLS_API_KEY
