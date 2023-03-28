@@ -2,8 +2,9 @@ import { BlsApiResponse } from '../types/types';
 
 const SERIES_ID_CPI: string = 'CUUR0000SA0'; // U.S. city average, All items
 const SERIES_ID_FOOD: string = 'CUUR0000SAF1'; // U.S. city average, Food
+const SERIES_ID_SHELTER: string = 'CUUR0000SAH1'; // U.S. city average, Shelter
 const SERIES_ID_ENERGY: string = 'CUUR0000SA0E'; // U.S. city average, Energy
-const SERIES_ID_GAS: string = 'CUUR0000SETB01'; // U.S. city average, Gasoline, all types
+//const SERIES_ID_GAS: string = 'CUUR0000SETB01'; // U.S. city average, Gasoline, all types
 
 export async function getData() {
   const currentYear = new Date().getFullYear();
@@ -13,8 +14,8 @@ export async function getData() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      seriesid: [SERIES_ID_CPI, SERIES_ID_FOOD, SERIES_ID_ENERGY, SERIES_ID_GAS],
-      startyear: currentYear - 5,
+      seriesid: [SERIES_ID_CPI, SERIES_ID_FOOD, SERIES_ID_SHELTER, SERIES_ID_ENERGY],
+      startyear: currentYear - 19,
       endyear: currentYear,
       catalog: true,
       calculations: true,
@@ -29,8 +30,8 @@ export async function getData() {
   return {
     cpi: getChange_Latest12Month(responseJson, SERIES_ID_CPI),
     food: getChange_Latest12Month(responseJson, SERIES_ID_FOOD),
+    shelter: getChange_Latest12Month(responseJson, SERIES_ID_SHELTER),
     energy: getChange_Latest12Month(responseJson, SERIES_ID_ENERGY),
-    gas: getChange_Latest12Month(responseJson, SERIES_ID_GAS),
     cpiHistory: getHistorical(responseJson, SERIES_ID_CPI),
     rawAll: responseJson
   };

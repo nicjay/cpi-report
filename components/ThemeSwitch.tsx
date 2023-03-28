@@ -19,15 +19,15 @@ export default function ThemeSwitch() {
     <button
       aria-label="Toggle Dark Mode"
       type="button"
-      className="h-8 w-8 rounded-md bg-slate-200 ring-slate-300 transition hover:ring-2 dark:bg-slate-800"
+      className="h-8 w-8 rounded-md bg-slate-300 ring-slate-600 transition hover:ring-2 dark:bg-slate-600 dark:ring-slate-300"
       onClick={() => {
         setTheme(theme === 'light' ? 'dark' : 'light');
       }}
     >
       {theme === 'light' ? (
-        <FontAwesomeIcon icon={faMoon} size="lg" className="text-purple-700" />
+        <FontAwesomeIcon icon={faMoon} size="sm" className="text-gray-900" />
       ) : (
-        <FontAwesomeIcon icon={faSun} size="lg" className="text-orange-400" />
+        <FontAwesomeIcon icon={faSun} size="sm" className="dark:text-gray-100" />
       )}
     </button>
   );

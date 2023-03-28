@@ -1,4 +1,4 @@
-import { faBolt, faCartShopping, faChartLine, faGasPump } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faCartShopping, faChartLine, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import Chart from '@/components/Chart';
 import { getData } from '@/utils/data';
@@ -9,10 +9,12 @@ export default async function Home() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <h2 className="p-8 text-center text-2xl">Previous 12 Months</h2>
+      <h2 className="my-4 text-lg text-gray-500 dark:text-gray-400">
+        12 Month percentage change, selected categories
+      </h2>
       <div className="grid grid-cols-4 gap-4">
         <Card
-          title="CPI"
+          title="All items"
           value={data.cpi}
           icon={faChartLine}
           twColorPrimary="text-blue-500"
@@ -33,17 +35,20 @@ export default async function Home() {
           twColorBorder="border-yellow-300"
         />
         <Card
-          title="Gas"
-          value={data.gas}
-          icon={faGasPump}
-          twColorPrimary="text-orange-500"
-          twColorBorder="border-orange-300"
+          title="Shelter"
+          value={data.shelter}
+          icon={faHouse}
+          twColorPrimary="text-purple-500"
+          twColorBorder="border-purple-300"
         />
       </div>
-      <div className="my-8 h-96 w-full">
+      <h2 className="my-4 pt-8 text-lg text-gray-500 dark:text-gray-400">
+        12 Month percentage change, all items, past 20 years
+      </h2>
+      <div className="h-96 w-full">
         <Chart historicalData={data.cpiHistory} />
       </div>
-      <div className="p-8 text-center text-lg text-slate-700 dark:text-slate-200">
+      <div className="text-md py-32 text-center text-slate-700 dark:text-slate-200">
         Data Sourced From <a href="https://www.bls.gov/">U.S. BUREAU OF LABOR STATISTICS</a>
       </div>
     </div>
